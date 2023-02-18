@@ -32,22 +32,41 @@ class LineMessengerController extends Controller
 
 
             // LINEのユーザーIDをuserIdに代入
-            $userId=$request['events'][0]['source']['userId'];
- 
+            $userId = $request['events'][0]['source']['userId'];
+
             // userIdがあるユーザーを検索
-            $user=User::where('line_id', $userId)->first();
- 
+            $user = User::where('line_id', $userId)->first();
+
             // もし見つからない場合は、データベースに保存
-            if($user==NULL) {
-                $profile=$bot->getProfile($userId)->getJSONDecodedBody();
- 
-                $user=new User();
-                $user->provider='line';
-                $user->line_id=$userId;
-                $user->name=$profile['displayName'];
+            if ($user == NULL) {
+                $profile = $bot->getProfile($userId)->getJSONDecodedBody();
+
+                $user = new User();
+                $user->provider = 'line';
+                $user->line_id = $userId;
+                $user->name = $profile['displayName'];
                 $user->save();
             }
             return 'ok';
         }
+    }
+
+    // メッセージ送信用
+    public function message()
+    {
+
+        // LINEBOTSDKの設定
+        $http_client = new CurlHTTPClient(config('services.line.channel_token'));
+        $bot = new LINEBot($http_client, ['channelSecret' => config('services.line.messenger_secret')]);
+
+        // LINEユーザーID指定
+        $userId = "Ud0dbbc78575930136b5c7a95895affda";
+
+        // メッセージ設定
+        $message = "こんにちは！";
+
+        // メッセージ送信
+        $textMessageBuilder = new TextMessageBuilder($message);
+        $response    = $bot->pushMessage($userId, $textMessageBuilder);
     }
 }
