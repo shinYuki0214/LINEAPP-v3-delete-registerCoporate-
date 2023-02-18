@@ -63,7 +63,7 @@ class LineMessengerController extends Controller
         $userId = "Ud0dbbc78575930136b5c7a95895affda";
 
         // メッセージ設定
-        $message = "こんにちは！";
+        $message = "明日の予約がございます";
 
         // メッセージ送信
         $textMessageBuilder = new TextMessageBuilder($message);
