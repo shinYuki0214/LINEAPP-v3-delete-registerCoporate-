@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LineLoginController;
+use App\Http\Controllers\LineMessengerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // ラインログイン用
 Route::get('/linelogin', [LineLoginController::class,'lineLogin'])->name('linelogin');
 Route::get('/callback', [LineLoginController::class,'callback'])->name('callback');
+
+// LINE メッセージ受信
+Route::post('/line/webhook', [LineMessengerController::class,'webhook'])->name('line.webhook');
+// LINE メッセージ送信用
+Route::get('/line/message', [LineMessengerController::class,'message']);
