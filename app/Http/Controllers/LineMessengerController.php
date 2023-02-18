@@ -26,9 +26,27 @@ class LineMessengerController extends Controller
             $http_client = new CurlHTTPClient(config('services.line.channel_token'));
             $bot = new LINEBot($http_client, ['channelSecret' => config('services.line.messenger_secret')]);
             // 送信するメッセージの設定
-            $reply_message = 'メッセージありがとうございますアプリから';
+            $reply_message = 'ラインで文章を送ったらユーザに追加される';
             // ユーザーにメッセージを返す
             $reply = $bot->replyText($reply_token, $reply_message);
+
+
+            // LINEのユーザーIDをuserIdに代入
+            $userId=$request['events'][0]['source']['userId'];
+ 
+            // userIdがあるユーザーを検索
+            $user=User::where('line_id', $userId)->first();
+ 
+            // もし見つからない場合は、データベースに保存
+            if($user==NULL) {
+                $profile=$bot->getProfile($userId)->getJSONDecodedBody();
+ 
+                $user=new User();
+                $user->provider='line';
+                $user->line_id=$userId;
+                $user->name=$profile['displayName'];
+                $user->save();
+            }
             return 'ok';
         }
     }
