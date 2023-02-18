@@ -24,5 +24,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 // ラインログイン用
-Route::get('/linelogin', 'LineLoginController@lineLogin')->name('linelogin');
-Route::get('/callback', 'LineLoginController@callback')->name('callback');
+Route::get('/linelogin', [LineLoginController::class,'lineLogin'])->name('linelogin');
+Route::get('/callback', [LineLoginController::class,'callback'])->name('callback');
