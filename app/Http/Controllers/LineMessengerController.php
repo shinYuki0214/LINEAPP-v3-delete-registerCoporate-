@@ -59,11 +59,15 @@ class LineMessengerController extends Controller
         $http_client = new CurlHTTPClient(config('services.line.channel_token'));
         $bot = new LINEBot($http_client, ['channelSecret' => config('services.line.messenger_secret')]);
 
+
+
+
         // LINEユーザーID指定
         $userId = "Ud0dbbc78575930136b5c7a95895affda";
+        $user = User::where('line_id', $userId)->first();
 
         // メッセージ設定
-        $message = "明日の予約がございます";
+        $message = $user->name . "様 明日の予約がございます";
 
         // メッセージ送信
         $textMessageBuilder = new TextMessageBuilder($message);
