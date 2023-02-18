@@ -95,7 +95,7 @@ class LineLoginController extends Controller
             $user = new User();
             $user->provider = 'line';
             $user->line_id = $profile->userId;
-            $user->name = $profile->displayName;
+            $user->line_name = $profile->displayName;
             $user->save();
             Auth::login($user);
             return redirect('/home');
