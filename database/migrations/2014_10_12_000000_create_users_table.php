@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->string('provider')->nullable();
             $table->string('line_id')->nullable();
+            $table->tinyInteger('role');
             $table->rememberToken();
             $table->timestamps();
         });
