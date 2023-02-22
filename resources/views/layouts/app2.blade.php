@@ -37,7 +37,7 @@
 <body>
 
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{{route('manager.index')}}">モンテドール発注システム</a>
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{{route('manager.index')}}">発注システム</a>
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -64,24 +64,39 @@
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
+                        @can('manager-higher')
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('manager.index') }}">
+                            <a class="nav-link" aria-current="page" href="{{ route('manager.index') }}">
                                 <span data-feather="home"></span>
                                 お客様一覧
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('manager.order.index') }}">
                                 <span data-feather="file"></span>
                                 発注未処理
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('manager.order.past') }}">
                                 <span data-feather="shopping-cart"></span>
                                 発注処理済み
                             </a>
                         </li>
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('order.index')}}">
+                                <span data-feather="file"></span>
+                                発注状況
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('order.create')}}">
+                                <span data-feather="file"></span>
+                                発注
+                            </a>
+                        </li>
+                        @endcan
                     </ul>
 
                 </div>

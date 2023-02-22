@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LineLoginController;
 use App\Http\Controllers\LineMessengerController;
 use App\Http\Controllers\ManagerUserController;
+use App\Http\Controllers\ManagerOrderController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,12 +36,21 @@ Route::post('/line/webhook', [LineMessengerController::class, 'webhook'])->name(
 // LINE メッセージ送信用
 Route::get('/line/message', [LineMessengerController::class, 'message']);
 
+//ログインユーザー以上
+Route::group(['middleware' => 'auth'],function(){
+    Route::get('/order', [OrderController::class, 'index'])->name('order.index');
+    Route::get('/order/create', [OrderController::class, 'create'])->name('order.create');
+    Route::post('/order/create', [OrderController::class, 'store'])->name('order.store');
+});
 
 // マネージャー以上
 Route::prefix('manager')
     ->middleware('can:manager-higher')
     ->group(function () {
         Route::get('/', [ManagerUserController::class, 'index'])->name('manager.index');
+        Route::get('/ordered', [ManagerOrderController::class, 'index'])->name('manager.order.index');
+        Route::post('/ordered', [ManagerOrderController::class, 'update'])->name('manager.order.update');
+        Route::get('/past', [ManagerOrderController::class, 'past'])->name('manager.order.past');
         // Route::get('/', [ManagerUserController::class, 'show'])->name('manager.show');
     });
 // 管理者のみ
