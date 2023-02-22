@@ -17,7 +17,7 @@ use App\Http\Controllers\ManagerUserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('guest.index');
 });
 
 Auth::routes();

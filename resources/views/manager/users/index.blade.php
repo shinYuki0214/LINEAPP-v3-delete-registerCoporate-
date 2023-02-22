@@ -1,27 +1,25 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">ライン名</th>
+                    <th scope="col">登録名</th>
+                    <th scope="col">登録メールアドレス</th>
+                </tr>
+            </thead>
+            <tbody>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
+                @foreach ($registerUsers as $registerUser)
+                <tr>
+                    <td>{{ $registerUser->line_name }}</td>
+                    <td>{{ $registerUser->name }}</td>
+                    <td>{{ $registerUser->email }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
-    <div>
-        @foreach ($registerUsers as $registerUser)
-             {{$registerUser->name}}
-        @endforeach
-    </div>
-</div>
 @endsection
