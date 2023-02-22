@@ -9,7 +9,8 @@
                 <table class="table table-striped table-sm text-center">
                     <thead>
                         <tr>
-                            <th scope="col">ユーザーID</th>
+                            <th scope="col">注文者名</th>
+                            <th scope="col">注文者ID</th>
                             <th scope="col">注文ID</th>
                             <th scope="col">商品名</th>
                             <th scope="col">注文数</th>
@@ -22,6 +23,7 @@
                     <tbody>
                         @foreach ($orderdDatas as $orderData)
                             <tr>
+                                <td>{{ $orderData->user->line_name }}</td>
                                 <td>{{ $orderData->user_id }}</td>
                                 <td>{{ $orderData->id }}</td>
                                 <td>{{ $orderData->order_product }}</td>
