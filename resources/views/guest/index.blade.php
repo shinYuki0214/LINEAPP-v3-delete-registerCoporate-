@@ -23,6 +23,7 @@
     <div class="form-signin-area">
         <main class="form-signin">
             <form method="POST" action="{{ route('login') }}">
+                @csrf
                 <img class="mb-4" src="" alt="" width="72" height="57">
                 <h1 class="h3 mb-3 fw-normal">ログイン</h1>
                 <div class="form-floating">
