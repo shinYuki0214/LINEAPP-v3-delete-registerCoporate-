@@ -35,6 +35,7 @@
 </head>
 
 <body>
+    @can('manager-higher')
 
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
         <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{{route('manager.index')}}">発注システム</a>
@@ -59,6 +60,7 @@
             </div>
         </div>
     </header>
+    @endcan
 
     <div class="container-fluid">
         <div class="row">
