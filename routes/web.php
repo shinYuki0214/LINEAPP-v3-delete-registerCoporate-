@@ -18,6 +18,9 @@ use App\Http\Controllers\OrderController;
 |
 */
 
+Route::get('/line', function () {
+    return view('guest.fromLine');
+});
 Route::get('/', function () {
     return view('guest.index');
 });
