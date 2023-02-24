@@ -84,7 +84,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('manager.order.past') }}">
                                 <span data-feather="shopping-cart"></span>
-                                発注処理済み
+                                発注確定
                             </a>
                         </li>
                         @else

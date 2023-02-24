@@ -12,7 +12,8 @@ class ManagerOrderController extends Controller
     //
     public function index(){
 
-        $users = User::where('line_name','!==','ラインとは連携してません')->orderBy('id', 'desc')->get();
+        $users = User::orderBy('id', 'desc')->get();
+        // $users = User::where('line_name','!=','ラインとは連携してません')->orderBy('id', 'desc')->get();
         $orderdDatas = Order::whereNull('order_status')
         ->get();
 
@@ -34,8 +35,10 @@ class ManagerOrderController extends Controller
         return redirect('/manager/ordered');
     }
     public function past(){
+        $users = User::orderBy('id', 'desc')->get();
+
         $orderdDatas = Order::whereNotNull('order_status')
         ->get();
-        return view('manager.orders.past',compact('orderdDatas'));
+        return view('manager.orders.past',compact('orderdDatas','users'));
     }
 }
