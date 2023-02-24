@@ -19,7 +19,7 @@
             <div class="mb-4">
                 <label for="order_num" class="form-label">注文商品</label>
                 <div class="input-group has-validation">
-                    <input type="num" name="order_num" class="form-control" id="order_num" placeholder="注文数" required="">
+                    {{-- <input type="num" name="order_num" class="form-control" id="order_num" placeholder="注文数" required=""> --}}
                     <select name="order_num" id="">
                         <option value=""></option>
                         <option value="1">1</option>
