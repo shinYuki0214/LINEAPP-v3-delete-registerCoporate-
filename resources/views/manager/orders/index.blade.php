@@ -17,7 +17,6 @@
                             <th scope="col">注文日</th>
                             <th scope="col">注文状況</th>
                             <th scope="col">対応</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -45,6 +44,41 @@
                 </table>
                 <button class="btn btn-lg btn-primary mb-3">処理</button>
             </form>
+
+
+
+            <table class="table table-striped table-sm text-center">
+                <thead>
+                    <tr>
+                        @foreach($users as $user)
+                        <th scope="col">{{$user->line_name}}</th>
+                        @endforeach
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($orderdDatas as $orderData)
+                        <tr>
+                            <td>{{ $orderData->user->line_name }}</td>
+                            <td>{{ $orderData->user_id }}</td>
+                            <td>{{ $orderData->id }}</td>
+                            <td>{{ $orderData->order_product }}</td>
+                            <td>{{ $orderData->order_num }}</td>
+                            <td>{{ $orderData->created_at }}</td>
+                            <td>
+                                @if ($orderData->order_status == null)
+                                    <span style="color:red;">未処理</span>
+                                @else
+                                    {{ $orderData->order_status }}
+                                @endif
+
+                            </td>
+                            <td><input type="checkbox" name="change_status[]" value="{{ $orderData->id }}"></td>
+
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <button class="btn btn-lg btn-primary mb-3">処理</button>
 
         </div>
     </div>

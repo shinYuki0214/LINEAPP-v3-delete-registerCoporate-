@@ -2,10 +2,11 @@
 
 @section('content')
     <div class="container">
-        <form action="{{route('order.store')}}" method="post">
-            @csrf
-            <div class="mb-4">
-                <label for="order_product" class="form-label">注文商品</label>
+        {{-- 
+            <form action="{{ route('order.store') }}" method="post">
+                @csrf
+                <div class="mb-4">
+                    <label for="order_product" class="form-label">注文商品</label>
                 <div class="input-group has-validation">
                     <select name="order_product" id="">
                         <option value=""></option>
@@ -13,13 +14,11 @@
                         <option value="バナナケーキ2">バナナケーキ2</option>
                         <option value="バナナケーキ3">バナナケーキ3</option>
                     </select>
-                    {{-- <input type="text" name="order_product" class="form-control" id="order_product" placeholder="注文商品" required=""> --}}
                 </div>
             </div>
             <div class="mb-4">
                 <label for="order_num" class="form-label">注文数</label>
                 <div class="input-group has-validation">
-                    {{-- <input type="num" name="order_num" class="form-control" id="order_num" placeholder="注文数" required=""> --}}
                     <select name="order_num" id="">
                         <option value=""></option>
                         <option value="1">1</option>
@@ -39,6 +38,53 @@
                         <option value="15">15</option>
                     </select>
                 </div>
+            </div>
+            <button class="btn btn-primary btn-lg">
+                注文
+            </button>
+        </form>
+        --}}
+
+
+
+        <form action="{{ route('order.store') }}" method="post">
+            @csrf
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">商品名</th>
+                            <th scope="col">金額</th>
+                            <th scope="col">個数</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>バナナケーキ</td>
+                            <td>740円</td>
+                            <td>
+                                <select name="order1" id="" class="form-select">
+                                    <option value="0">注文なし</option>
+                                    @for($i = 1; $i <200; $i++)
+                                    <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ミニバナナケーキ</td>
+                            <td>200円</td>
+                            <td>
+                                <select name="order2" id="" class="form-select">
+                                    <option value="0">注文なし</option>
+                                    @for($i = 1; $i <200; $i++)
+                                    <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <button class="btn btn-primary btn-lg">
                 注文
