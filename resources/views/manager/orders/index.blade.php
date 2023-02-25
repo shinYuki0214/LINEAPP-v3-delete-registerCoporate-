@@ -16,7 +16,7 @@
                 </thead>
                 <tbody>
                     @foreach ($users as $user)
-                        @if ($user->checkedOrders())
+                        @if (!$user->checkedOrders())
                             <tr>
                                 <td>{{ $user->name }}</td>
                                 <td scope="col">
