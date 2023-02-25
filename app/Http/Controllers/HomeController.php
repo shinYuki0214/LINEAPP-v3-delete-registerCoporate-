@@ -28,7 +28,7 @@ class HomeController extends Controller
         $user = Auth::user();
         // dd($user->name);
         if(($user->name == '')){
-            return view('register.index');
+            return to_route('lineregister.index');
         }else{
             return view('home');
         }

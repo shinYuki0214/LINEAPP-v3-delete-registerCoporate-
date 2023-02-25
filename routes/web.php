@@ -5,6 +5,7 @@ use App\Http\Controllers\LineLoginController;
 use App\Http\Controllers\LineMessengerController;
 use App\Http\Controllers\ManagerUserController;
 use App\Http\Controllers\ManagerOrderController;
+use App\Http\Controllers\RegisterFromLINEController;
 use App\Http\Controllers\OrderController;
 
 /*
@@ -38,6 +39,10 @@ Route::get('/callback', [LineLoginController::class, 'callback'])->name('callbac
 Route::post('/line/webhook', [LineMessengerController::class, 'webhook'])->name('line.webhook');
 // LINE メッセージ送信用
 Route::get('/line/message', [LineMessengerController::class, 'message']);
+
+// LINEで初回登録した人に名前を追加してもらう
+Route::get('/lineregister',[RegisterFromLINEController::class, 'index'])->name('lineregister.index');
+Route::post('/lineregister',[RegisterFromLINEController::class, 'update'])->name('lineregister.update');
 
 //ログインユーザー以上
 Route::group(['middleware' => 'auth'],function(){
