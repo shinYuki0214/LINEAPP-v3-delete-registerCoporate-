@@ -12,13 +12,12 @@ class ManagerOrderController extends Controller
     //
     public function index(){
 
-        $users = User::orderBy('id', 'desc')->get();
-        // $users = User::where('line_name','!=','ラインとは連携してません')->orderBy('id', 'desc')->get();
+        // $users = User::orderBy('id', 'desc')->get();
+        $users = User::where('role','>=','9')->orderBy('id', 'desc')->get();
         $orderdDatas = Order::whereNull('order_status')
         ->get();
 
         // $test = Order::find(1)->user;
-
         // dd($test);
         return view('manager.orders.index',compact('orderdDatas','users'));
     }
@@ -30,12 +29,13 @@ class ManagerOrderController extends Controller
         ];
 
         foreach($needChangeDatas as $theOrderId){
-            Order::where('id','=',$theOrderId)->update($param);
+            Order::where('id','=',$theOrderId)
+            ->update($param);
         }
         return redirect('/manager/ordered');
     }
     public function past(){
-        $users = User::orderBy('id', 'desc')->get();
+        $users = User::where('role','>=','9')->orderBy('id', 'desc')->get();
 
         $orderdDatas = Order::whereNotNull('order_status')
         ->get();

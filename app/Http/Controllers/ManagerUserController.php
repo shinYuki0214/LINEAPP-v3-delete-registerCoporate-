@@ -12,6 +12,7 @@ class ManagerUserController extends Controller
     //ユーザー一覧画面を作成
     public function index(){
         $registerUsers = DB::table('users')
+        ->where('role', '>=', '9')
         ->orderBy('id','desc')
         ->paginate(10);
 

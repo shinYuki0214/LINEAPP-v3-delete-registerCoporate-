@@ -49,4 +49,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+    public function checkedOrders(){
+        $check = false;
+        $orderDatas = $this->orders;
+        foreach($orderDatas as $order){
+            if($order->order_status != '' || is_null(!$order->order_status)){
+                $check = true;
+            }
+        }
+        return $check;
+    }
 }

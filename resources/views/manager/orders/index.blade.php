@@ -16,21 +16,24 @@
                 </thead>
                 <tbody>
                     @foreach ($users as $user)
-                        <tr>
-                            <td>{{ $user->name }}</td>
-                            <td scope="col">
-                                @foreach ($user->orders as $order)
-                                    {{ $order->order1 }}
-                                @endforeach
-                            </td>
-                            <td scope="col">
-                                @foreach ($user->orders as $order)
-                                    {{ $order->order2 }}
-                                @endforeach
-                            </td>
-                            <td><input type="checkbox" name="change_status[]" value="{{ $user->id }}"></td>
-                        </tr>
+                        @if ($user->checkedOrders())
+                            <tr>
+                                <td>{{ $user->name }}</td>
+                                <td scope="col">
+                                    @foreach ($user->orders as $order)
+                                        {{ $order->order1 }}
+                                    @endforeach
+                                </td>
+                                <td scope="col">
+                                    @foreach ($user->orders as $order)
+                                        {{ $order->order2 }}
+                                    @endforeach
+                                </td>
+                                <td><input type="checkbox" name="change_status[]" value="{{ $user->id }}"></td>
+                            </tr>
+                        @endif
                     @endforeach
+
                 </tbody>
             </table>
             <button class="btn btn-lg btn-primary mb-3">確定</button>

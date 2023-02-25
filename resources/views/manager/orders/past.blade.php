@@ -14,29 +14,31 @@
             </thead>
             <tbody>
                 @foreach ($users as $user)
-                    <tr>
-                        <td scope="col">{{ $user->name }}</td>
-                        <td scope="col">
-                            @foreach ($user->orders as $order)
-                                {{ $order->order_status }}
-                                @if (is_null($order->order_status))
-                                    未確定
-                                @else
+                    @if (!$user->checkedOrders())
+                        <tr>
+                            <td scope="col">{{ $user->name }}</td>
+                            <td scope="col">
+                                @foreach ($user->orders as $order)
                                     {{ $order->order_status }}
-                                @endif
-                            @endforeach
-                        </td>
-                        <td scope="col">
-                            @foreach ($user->orders as $order)
-                                {{ $order->order1 }}
-                            @endforeach
-                        </td>
-                        <td scope="col">
-                            @foreach ($user->orders as $order)
-                                {{ $order->order2 }}
-                            @endforeach
-                        </td>
-                    </tr>
+                                    @if (is_null($order->order_status))
+                                        未確定
+                                    @else
+                                        {{ $order->order_status }}
+                                    @endif
+                                @endforeach
+                            </td>
+                            <td scope="col">
+                                @foreach ($user->orders as $order)
+                                    {{ $order->order1 }}
+                                @endforeach
+                            </td>
+                            <td scope="col">
+                                @foreach ($user->orders as $order)
+                                    {{ $order->order2 }}
+                                @endforeach
+                            </td>
+                        </tr>
+                    @endif
                 @endforeach
             </tbody>
         </table>
