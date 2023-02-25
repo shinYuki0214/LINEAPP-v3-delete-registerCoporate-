@@ -12,8 +12,8 @@ class ManagerOrderController extends Controller
     //
     public function index(){
 
-        // $users = User::orderBy('id', 'desc')->get();
-        $users = User::where('role','>=','9')->orderBy('id', 'desc')->get();
+        $users = User::orderBy('id', 'desc')->get();
+        // $users = User::where('role','>=','9')->orderBy('id', 'desc')->get();
         $orderdDatas = Order::whereNull('order_status')
         ->get();
 
@@ -35,7 +35,8 @@ class ManagerOrderController extends Controller
         return redirect('/manager/ordered');
     }
     public function past(){
-        $users = User::where('role','>=','9')->orderBy('id', 'desc')->get();
+        $users = User::orderBy('id', 'desc')->get();
+        // $users = User::where('role','>=','9')->orderBy('id', 'desc')->get();
 
         $orderdDatas = Order::whereNotNull('order_status')
         ->get();

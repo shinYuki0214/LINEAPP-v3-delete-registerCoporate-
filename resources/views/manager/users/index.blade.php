@@ -1,5 +1,5 @@
 @extends('layouts.app2')
-
+@section('sectiontitle','お客様一覧')
 @section('content')
     <div class="table-responsive">
         <table class="table table-striped table-sm">
