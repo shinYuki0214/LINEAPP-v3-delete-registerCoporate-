@@ -26,8 +26,8 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        dd($user->name);
-        if(is_null($user->name)){
+        // dd($user->name);
+        if(($user->name == '')){
             return view('register.index');
         }else{
             return view('home');
