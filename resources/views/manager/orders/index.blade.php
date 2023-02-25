@@ -21,12 +21,12 @@
                                 <td>{{ $user->name }}</td>
                                 <td scope="col">
                                     @foreach ($user->orders as $order)
-                                        {{ $order->order1 }}
+                                        {{ $order->order1[0] }}
                                     @endforeach
                                 </td>
                                 <td scope="col">
                                     @foreach ($user->orders as $order)
-                                        {{ $order->order2 }}
+                                        {{ $order->order2[0] }}
                                     @endforeach
                                 </td>
                                 <td><input type="checkbox" name="change_status[]" value="{{ $user->id }}"></td>
