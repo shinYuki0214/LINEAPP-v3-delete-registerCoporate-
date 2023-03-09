@@ -1,5 +1,5 @@
 @extends('layouts.app2')
-@section('sectiontitle', $tomorrow->format('Y年m月d日の発注'))
+@section('sectiontitle', $dateRecive->format('Y年m月d日の発注'))
 
 @section('content')
     <div class="container">
@@ -117,33 +117,29 @@
                     </tr>
                 </tbody>
             </table>
-        </div> 
-        <div class="flex">
-            <button class="btn btn-primary btn-lg">
-                変更する
-            </button>
-            <div>
-                <form action="{{ route('order.store') }}" method="post">
-                    @csrf
-                    <input type="hidden" name="order1" value="{{$orderdDatas['order1']}}">
-                    <input type="hidden" name="order2" value="{{$orderdDatas['order2']}}">
-                    <input type="hidden" name="order3" value="{{$orderdDatas['order3']}}">
-                    <input type="hidden" name="order4" value="{{$orderdDatas['order4']}}">
-                    <input type="hidden" name="order5" value="{{$orderdDatas['order5']}}">
-                    <input type="hidden" name="order6" value="{{$orderdDatas['order6']}}">
-                    <input type="hidden" name="order7" value="{{$orderdDatas['order7']}}">
-                    <input type="hidden" name="order8" value="{{$orderdDatas['order8']}}">
-                    <input type="hidden" name="order9" value="{{$orderdDatas['order9']}}">
-                    <input type="hidden" name="order10" value="{{$orderdDatas['order10']}}">
-                    <input type="hidden" name="order11" value="{{$orderdDatas['order11']}}">
-                    <input type="hidden" name="order12" value="{{$orderdDatas['order12']}}">
-                    <input type="hidden" name="order13" value="{{$orderdDatas['order13']}}">
-                    <input type="hidden" name="order14" value="{{$orderdDatas['order14']}}">
-                    <button class="btn btn-primary btn-lg">
-                        確定する
-                    </button>
-                </form>
-            </div>
+        </div>
+        <div>
+            <form action="{{ route('order.store') }}" method="post">
+                @csrf
+                <input type="hidden" name="order1" value="{{ $orderdDatas['order1'] }}">
+                <input type="hidden" name="order2" value="{{ $orderdDatas['order2'] }}">
+                <input type="hidden" name="order3" value="{{ $orderdDatas['order3'] }}">
+                <input type="hidden" name="order4" value="{{ $orderdDatas['order4'] }}">
+                <input type="hidden" name="order5" value="{{ $orderdDatas['order5'] }}">
+                <input type="hidden" name="order6" value="{{ $orderdDatas['order6'] }}">
+                <input type="hidden" name="order7" value="{{ $orderdDatas['order7'] }}">
+                <input type="hidden" name="order8" value="{{ $orderdDatas['order8'] }}">
+                <input type="hidden" name="order9" value="{{ $orderdDatas['order9'] }}">
+                <input type="hidden" name="order10" value="{{ $orderdDatas['order10'] }}">
+                <input type="hidden" name="order11" value="{{ $orderdDatas['order11'] }}">
+                <input type="hidden" name="order12" value="{{ $orderdDatas['order12'] }}">
+                <input type="hidden" name="order13" value="{{ $orderdDatas['order13'] }}">
+                <input type="hidden" name="order14" value="{{ $orderdDatas['order14'] }}">
+                <input type="hidden" name="receive_date" value="{{ $orderdDatas['receive_date'] }}">
+                <button class="btn btn-primary btn-lg">
+                    確定する
+                </button>
+            </form>
         </div>
     </div>
 @endsection

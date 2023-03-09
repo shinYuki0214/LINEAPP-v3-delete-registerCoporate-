@@ -75,10 +75,27 @@
                                 お客様一覧
                             </a>
                         </li>
+                        @php
+                            $beforeDate = $Global_recived_date;
+                            $theDate = $Global_recived_date;
+                            $afterDate = $Global_recived_date;
+                        @endphp
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('manager.order.index') }}">
+                            <a class="nav-link" href="{{ route('manager.order.index',$nextMonday) }}">
                                 <span data-feather="file"></span>
-                                明日の発注
+                                月曜日の配達
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('manager.order.index',$nextWednesday) }}">
+                                <span data-feather="file"></span>
+                                水曜日の配達
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('manager.order.index',$nextFriday) }}">
+                                <span data-feather="file"></span>
+                                金曜日の配達
                             </a>
                         </li>
                         @else

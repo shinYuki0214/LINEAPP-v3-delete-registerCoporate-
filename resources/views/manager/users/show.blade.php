@@ -25,7 +25,7 @@
         <table class="table table-striped table-sm text-center">
             <thead>
                 <tr>
-                    <th>注文日</th>
+                    <th>配達日</th>
                     <th scope="col">バナナケーキ</th>
                     <th scope="col">ミニバナナケーキ</th>
                     <th scope="col">ミニバナナケーキ　6個入</th>
@@ -48,7 +48,7 @@
                         <td class="">
                             <span>
                                 @php
-                                    echo Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $order->created_at)->format('Y/m/d');
+                                    echo Carbon\Carbon::createFromFormat('Y-m-d', $order->receive_date)->format('Y/m/d');
                                 @endphp
                             </span>
                         </td>

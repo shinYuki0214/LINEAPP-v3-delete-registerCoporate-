@@ -26,6 +26,7 @@ class Order extends Model
         'order12',
         'order13',
         'order14',
+        'receive_date',
     ];
 
     public function user()

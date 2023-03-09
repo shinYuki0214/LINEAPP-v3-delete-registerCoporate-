@@ -44,7 +44,7 @@ class LineMessengerController extends Controller
                 $user = new User();
                 $user->provider = 'line';
                 $user->line_id = $userId;
-                $user->name = $profile['displayName'];
+                $user->line_name = $profile['displayName'];
                 $user->save();
             }
             return 'ok';
@@ -52,21 +52,26 @@ class LineMessengerController extends Controller
     }
 
     // メッセージ送信用
-    public function message()
-    {
+    public function message() {
+
+        $users = User::get();
 
         // LINEBOTSDKの設定
         $http_client = new CurlHTTPClient(config('services.line.channel_token'));
         $bot = new LINEBot($http_client, ['channelSecret' => config('services.line.messenger_secret')]);
+
+        
         // LINEユーザーID指定
-        $userId = "Ud0dbbc78575930136b5c7a95895affda";
-        $user = User::where('line_id', $userId)->first();
-
+        
         // メッセージ設定
-        $message = $user->name . "様 明日の予約がございます";
-
+        $message = "本日発注締切日です。まだの方はお願いします。";
+        
         // メッセージ送信
         $textMessageBuilder = new TextMessageBuilder($message);
-        $response    = $bot->pushMessage($userId, $textMessageBuilder);
+        foreach($users as $user){
+            $userId = $user->line_id;
+            $response    = $bot->pushMessage($userId, $textMessageBuilder);
+        }
+ 
     }
 }

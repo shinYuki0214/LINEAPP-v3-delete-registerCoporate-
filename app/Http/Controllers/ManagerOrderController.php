@@ -12,17 +12,14 @@ use Carbon\Carbon;
 class ManagerOrderController extends Controller
 {
     //
-    public function index(){
-
+    public function index($receive_date){
+        $receive_date = new Carbon($receive_date);
         $today=Carbon::today();
-
         $tommorow =  Carbon::tomorrow();
         // $users = User::orderBy('id', 'desc')->get();
         $users = User::where('role','>=','9')->orderBy('id', 'desc')->get();
-        $orderdDatas = Order::whereNull('order_status')
-        ->get();
 
-        return view('manager.orders.index',compact('orderdDatas','users','today','tommorow'));
+        return view('manager.orders.index',compact('users','receive_date'));
     }
     
     // public function update(Request $request){
@@ -38,12 +35,12 @@ class ManagerOrderController extends Controller
     //     }
     //     return redirect('/manager/ordered');
     // }
-    public function past(){
-        // $users = User::orderBy('id', 'desc')->get();
-        $users = User::where('role','>=','9')->orderBy('id', 'desc')->get();
+    // public function past(){
+    //     // $users = User::orderBy('id', 'desc')->get();
+    //     $users = User::where('role','>=','9')->orderBy('id', 'desc')->get();
 
-        $orderdDatas = Order::whereNotNull('order_status')
-        ->get();
-        return view('manager.orders.past',compact('orderdDatas','users'));
-    }
+    //     $orderdDatas = Order::whereNotNull('order_status')
+    //     ->get();
+    //     return view('manager.orders.past',compact('orderdDatas','users'));
+    // }
 }

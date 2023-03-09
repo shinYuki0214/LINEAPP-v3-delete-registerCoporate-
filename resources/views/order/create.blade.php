@@ -1,5 +1,5 @@
 @extends('layouts.app2')
-@section('sectiontitle', $tomorrow->format('Y年m月d日の発注'))
+@section('sectiontitle', $dateRecive->format('Y年m月d日の発注'))
 
 @section('content')
     <div class="container">
@@ -186,6 +186,7 @@
                     </tbody>
                 </table>
             </div>
+            <input type="hidden" name="receive_date" value="{{$dateRecive}}">
             <button class="btn btn-primary btn-lg">
                 注文
             </button>

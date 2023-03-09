@@ -14,33 +14,31 @@ use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
     //
-    public function index()
+    public function index($receive_date)
     {
-        $today = Carbon::today();
-        $tomorrow = Carbon::tomorrow();
-        $orderdDatas = Order::where('user_id', '=', Auth::id())
-            ->whereDate('created_at',$today)
-            ->first();
-        return view('order.index', compact('orderdDatas','today','tomorrow'));
+        $targetDate = new Carbon($receive_date);
+        $orderdDatas = Order::where('user_id', '=', Auth::id())->whereDate('receive_date', $targetDate)->first();
+        return view('order.index', compact('orderdDatas','receive_date','targetDate'));
     }
-    public function create()
+    public function create($receive_date)
     {
+        $dateRecive = new Carbon($receive_date);
         $today = Carbon::today();
         $tomorrow = Carbon::tomorrow();
 
-        return view('order.create',compact('today','tomorrow'));
+        return view('order.create',compact('today','tomorrow','dateRecive'));
     }
     public function check(Request $request){
         $today = Carbon::today();
         $tomorrow = Carbon::tomorrow();
         $orderdDatas = $request;
-        return view('order.check', compact('orderdDatas','today','tomorrow'));
+        $dateRecive = new Carbon($request['receive_date']);
+        return view('order.check', compact('orderdDatas','dateRecive'));
     }
     public function store(Request $request)
     {
-        $today = Carbon::today();
-        $tomorrow = Carbon::tomorrow();
-        $todaysOrder = Order::where('user_id', '=', Auth::id())->whereDate('created_at', $today)->exists();
+        $targetDate = new Carbon($request['receive_date']);
+        $todaysOrder = Order::where('user_id', '=', Auth::id())->whereDate('receive_date', $targetDate)->exists();
         if (!$todaysOrder) {
             Order::create([
                 'user_id' => Auth::id(),
@@ -58,9 +56,10 @@ class OrderController extends Controller
                 'order12' => $request['order12'],
                 'order13' => $request['order13'],
                 'order14' => $request['order14'],
+                'receive_date' => $request['receive_date'],
             ]);
         } else {
-            Order::where('user_id', '=', Auth::id())->whereDate('created_at', $today)->update(
+            Order::where('user_id', '=', Auth::id())->whereDate('receive_date', $targetDate)->update(
                 [
                     'order1' => $request['order1'],
                     'order2' => $request['order2'],
@@ -81,6 +80,6 @@ class OrderController extends Controller
         }
 
         session()->flash('status', '登録okです');
-        return to_route('order.index');
+        return to_route('home');
     }
 }

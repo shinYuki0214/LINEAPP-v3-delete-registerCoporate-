@@ -30,7 +30,7 @@ return new class extends Migration
             $table->integer('order12')->nullable();
             $table->integer('order13')->nullable();
             $table->integer('order14')->nullable();
-            $table->string('order_status')->nullable();
+            $table->date('receive_date');
             $table->timestamps();
         });
     }

@@ -6,7 +6,7 @@
             <thead>
                 <tr>
                     <th scope="col">ライン名</th>
-                    <th scope="col">登録名</th>
+                    <th scope="col">会社名</th>
                     <th scope="col">登録メールアドレス</th>
                 </tr>
             </thead>

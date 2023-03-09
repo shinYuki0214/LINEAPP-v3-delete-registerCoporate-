@@ -1,5 +1,5 @@
 @extends('layouts.app2')
-@section('sectiontitle', $tomorrow->format('Y年m月d日の発注'))
+@section('sectiontitle', $targetDate->format('Y年m月d日の発注'))
 
 @section('content')
     <div class="container">
@@ -118,7 +118,7 @@
                 </tbody>
             </table>
         </div>
-        <a href="{{route('order.create')}}" class="btn btn-primary btn-lg">
+        <a href="{{route('order.create',$receive_date)}}" class="btn btn-success btn-lg">
             変更する
         </a>
     </div>

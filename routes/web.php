@@ -43,8 +43,8 @@ Route::post('/lineregister', [RegisterFromLINEController::class, 'update'])->nam
 
 //ログインユーザー以上
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/order', [OrderController::class, 'index'])->name('order.index');
-    Route::get('/order/create', [OrderController::class, 'create'])->name('order.create');
+    Route::get('/order/{receive_date}', [OrderController::class, 'index'])->name('order.index');
+    Route::get('/order/create/{receive_date}', [OrderController::class, 'create'])->name('order.create');
     Route::post('/order/check', [OrderController::class, 'check'])->name('order.check');
     Route::post('/order/create', [OrderController::class, 'store'])->name('order.store');
 });
@@ -54,10 +54,14 @@ Route::prefix('manager')
     ->middleware('can:manager-higher')
     ->group(function () {
         Route::get('/', [ManagerUserController::class, 'index'])->name('manager.index');
-        Route::get('/ordered', [ManagerOrderController::class, 'index'])->name('manager.order.index');
+        Route::get('/ordered/yesterday', [ManagerOrderController::class, 'yesterday'])->name('manager.order.yesterday');
+        Route::get('/ordered/tomorrow', [ManagerOrderController::class, 'tomorrow'])->name('manager.order.tomorrow');
+        Route::get('/ordered/{receive_date}', [ManagerOrderController::class, 'index'])->name('manager.order.index');
         // Route::post('/ordered', [ManagerOrderController::class, 'update'])->name('manager.order.update');
         Route::get('/past', [ManagerOrderController::class, 'past'])->name('manager.order.past');
         Route::get('/show/{id}', [ManagerUserController::class, 'show'])->name('manager.show');
         // Route::get('/', [ManagerUserController::class, 'show'])->name('manager.show');
     });
 // 管理者のみ
+
+
