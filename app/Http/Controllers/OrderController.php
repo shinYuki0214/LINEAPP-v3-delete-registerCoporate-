@@ -16,22 +16,30 @@ class OrderController extends Controller
     //
     public function index()
     {
-
         $today = Carbon::today();
+        $tomorrow = Carbon::tomorrow();
         $orderdDatas = Order::where('user_id', '=', Auth::id())
-            ->orderBy('id', 'desc')
-            ->paginate(10);
-        return view('order.index', compact('orderdDatas'));
+            ->whereDate('created_at',$today)
+            ->first();
+        return view('order.index', compact('orderdDatas','today','tomorrow'));
     }
     public function create()
     {
         $today = Carbon::today();
+        $tomorrow = Carbon::tomorrow();
 
-        return view('order.create',compact('today'));
+        return view('order.create',compact('today','tomorrow'));
+    }
+    public function check(Request $request){
+        $today = Carbon::today();
+        $tomorrow = Carbon::tomorrow();
+        $orderdDatas = $request;
+        return view('order.check', compact('orderdDatas','today','tomorrow'));
     }
     public function store(Request $request)
     {
         $today = Carbon::today();
+        $tomorrow = Carbon::tomorrow();
         $todaysOrder = Order::where('user_id', '=', Auth::id())->whereDate('created_at', $today)->exists();
         if (!$todaysOrder) {
             Order::create([

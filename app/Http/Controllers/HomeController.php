@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Order;
 
 class HomeController extends Controller
 {
@@ -27,10 +29,13 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         // dd($user->name);
-        if(($user->name == '')){
+        if (($user->name == '')) {
             return to_route('lineregister.index');
-        }else{
-            return view('home');
+        } else {
+            $today = Carbon::today();
+            $tommorow =  Carbon::tomorrow();
+            $todaysOrder = Order::where('user_id', '=', Auth::id())->whereDate('created_at', $today)->exists();
+            return view('home',compact('todaysOrder','tommorow'));
         }
     }
 }

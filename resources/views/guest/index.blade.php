@@ -19,7 +19,7 @@
 </head>
 
 <body>
-
+    @guest
     <div class="form-signin-area">
         <main class="form-signin">
             <form method="POST" action="{{ route('login') }}">
@@ -60,7 +60,7 @@
             <p class="mt-5 mb-3 text-muted">&copy; 2023iwata</p>
         </main>
     </div>
-
+    @endguest
 </body>
 
 </html>

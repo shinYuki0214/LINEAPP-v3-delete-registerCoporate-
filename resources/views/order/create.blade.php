@@ -1,9 +1,9 @@
 @extends('layouts.app2')
-@section('sectiontitle',$today->format('Y年m月d日の発注'))
+@section('sectiontitle', $tomorrow->format('Y年m月d日の発注'))
 
 @section('content')
     <div class="container">
-        <form action="{{ route('order.store') }}" method="post">
+        <form action="{{ route('order.check') }}" method="post">
             @csrf
             <div class="table-responsive">
                 <table class="table table-striped table-sm">

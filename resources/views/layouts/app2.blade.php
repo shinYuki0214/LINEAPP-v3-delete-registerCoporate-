@@ -78,13 +78,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('manager.order.index') }}">
                                 <span data-feather="file"></span>
-                                発注未処理
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('manager.order.past') }}">
-                                <span data-feather="shopping-cart"></span>
-                                発注確定
+                                明日の発注
                             </a>
                         </li>
                         @else

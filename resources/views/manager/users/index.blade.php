@@ -14,7 +14,7 @@
 
                 @foreach ($registerUsers as $registerUser)
                 <tr>
-                    <td>{{ $registerUser->line_name }}</td>
+                    <td><a href="{{ route('manager.show', ['id' => $registerUser->id]) }}">{{ $registerUser->line_name }}</a></td>
                     <td>{{ $registerUser->name }}</td>
                     <td>{{ $registerUser->email }}</td>
                 </tr>

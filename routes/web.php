@@ -22,13 +22,10 @@ use App\Http\Controllers\OrderController;
 Route::get('/line', function () {
     return view('guest.fromLine');
 });
-Route::get('/', function () {
-    return view('guest.index');
-});
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 // ラインログイン用
@@ -41,13 +38,14 @@ Route::post('/line/webhook', [LineMessengerController::class, 'webhook'])->name(
 Route::get('/line/message', [LineMessengerController::class, 'message']);
 
 // LINEで初回登録した人に名前を追加してもらう
-Route::get('/lineregister',[RegisterFromLINEController::class, 'index'])->name('lineregister.index');
-Route::post('/lineregister',[RegisterFromLINEController::class, 'update'])->name('lineregister.update');
+Route::get('/lineregister', [RegisterFromLINEController::class, 'index'])->name('lineregister.index');
+Route::post('/lineregister', [RegisterFromLINEController::class, 'update'])->name('lineregister.update');
 
 //ログインユーザー以上
-Route::group(['middleware' => 'auth'],function(){
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/order', [OrderController::class, 'index'])->name('order.index');
     Route::get('/order/create', [OrderController::class, 'create'])->name('order.create');
+    Route::post('/order/check', [OrderController::class, 'check'])->name('order.check');
     Route::post('/order/create', [OrderController::class, 'store'])->name('order.store');
 });
 
@@ -57,8 +55,9 @@ Route::prefix('manager')
     ->group(function () {
         Route::get('/', [ManagerUserController::class, 'index'])->name('manager.index');
         Route::get('/ordered', [ManagerOrderController::class, 'index'])->name('manager.order.index');
-        Route::post('/ordered', [ManagerOrderController::class, 'update'])->name('manager.order.update');
+        // Route::post('/ordered', [ManagerOrderController::class, 'update'])->name('manager.order.update');
         Route::get('/past', [ManagerOrderController::class, 'past'])->name('manager.order.past');
+        Route::get('/show/{id}', [ManagerUserController::class, 'show'])->name('manager.show');
         // Route::get('/', [ManagerUserController::class, 'show'])->name('manager.show');
     });
 // 管理者のみ

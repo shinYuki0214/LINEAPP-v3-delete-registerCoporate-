@@ -14,6 +14,18 @@ class Order extends Model
         'user_id',
         'order1',
         'order2',
+        'order3',
+        'order4',
+        'order5',
+        'order6',
+        'order7',
+        'order8',
+        'order9',
+        'order10',
+        'order11',
+        'order12',
+        'order13',
+        'order14',
     ];
 
     public function user()

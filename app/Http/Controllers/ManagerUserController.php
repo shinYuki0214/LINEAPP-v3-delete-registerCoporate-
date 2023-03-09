@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Support\Facades\DB;
 
 
@@ -17,6 +18,11 @@ class ManagerUserController extends Controller
         ->paginate(10);
 
         return view('manager.users.index',compact('registerUsers'));
+    }
+    public function show($id){
+        // dd($id);
+        $theUser = User::findOrfail($id);
+        return view('manager.users.show',compact('theUser'));
     }
 
 }

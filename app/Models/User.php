@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Order;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -49,14 +50,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
-    public function checkedOrders(){
-        $check = false;
-        $orderDatas = $this->orders;
-        foreach($orderDatas as $order){
-            if($order->order_status != '' || is_null(!$order->order_status)){
-                $check = true;
-            }
-        }
-        return $check;
+    public function todaysOrder(){
+        return $this->hasMany(Order::class);
     }
+
+    // public function checkedOrders(){
+    //     $check = false;
+    //     $orderDatas = $this->orders;
+    //     foreach($orderDatas as $order){
+    //         if($order->order_status != '' || is_null(!$order->order_status)){
+    //             $check = true;
+    //         }
+    //     }
+    //     return $check;
+    // }
 }
