@@ -41,29 +41,37 @@ class Batch extends Command
      */
     public function handle()
     {
-        $tomorrow = Carbon::tomorrow()->format('n月j日');
+        $today = Carbon::today();
+        $checkMon = $today->isMonday();
+        $checkWed = $today->isWednesday();
+        $checkFri = $today->isFriday();
 
-        // LINEユーザー取得
-        $users = User::get();
+        if ($checkMon || $checkWed || $checkFri) {
 
-        // LINEBOTSDKの設定
-        $http_client = new CurlHTTPClient(config('services.line.channel_token'));
-        $bot = new LINEBot($http_client, ['channelSecret' => config('services.line.messenger_secret')]);
+            $tomorrow = Carbon::tomorrow()->format('n月j日');
 
-        // メッセージ設定
-        $title = $tomorrow."の発注締切日です。";
-        $message = $tomorrow."の発注締切日です。まだの方は17:00までにお願いいたします。";
+            // LINEユーザー取得
+            $users = User::get();
 
-        // メッセージ作成
-        $button = new ButtonTemplateBuilder($title, $message, null, [
-            new TemplateActionBuilder\UriTemplateActionBuilder("発注する", route("linestart"))
-        ]);
-        $button_message = new TemplateMessageBuilder('発注締切のお知らせ', $button);
-        
-        // LINEユーザーID指定-送信
-        foreach ($users as $user) {
-            $userId = $user->line_id;
-            $response = $bot->pushMessage($userId, $button_message);
+            // LINEBOTSDKの設定
+            $http_client = new CurlHTTPClient(config('services.line.channel_token'));
+            $bot = new LINEBot($http_client, ['channelSecret' => config('services.line.messenger_secret')]);
+
+            // メッセージ設定
+            $title = $tomorrow . "の発注締切日です。";
+            $message = $tomorrow . "の発注締切日です。まだの方は17:00までにお願いいたします。";
+
+            // メッセージ作成
+            $button = new ButtonTemplateBuilder($title, $message, null, [
+                new TemplateActionBuilder\UriTemplateActionBuilder("発注する", route("linestart"))
+            ]);
+            $button_message = new TemplateMessageBuilder('発注締切のお知らせ', $button);
+
+            // LINEユーザーID指定-送信
+            foreach ($users as $user) {
+                $userId = $user->line_id;
+                $response = $bot->pushMessage($userId, $button_message);
+            }
         }
         return Command::SUCCESS;
     }
