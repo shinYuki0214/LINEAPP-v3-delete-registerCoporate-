@@ -7,7 +7,13 @@ use Illuminate\Console\Command;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use LINE\LINEBot;
 use App\Models\User;
+use Carbon\Carbon;
 use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
+use LINE\LINEBot\Constant\HTTPHeader;
+use LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder;
+use LINE\LINEBot\TemplateActionBuilder;
 
 use Illuminate\Http\Request;
 
@@ -35,24 +41,29 @@ class Batch extends Command
      */
     public function handle()
     {
+        $tomorrow = Carbon::tomorrow()->format('n月j日');
 
+        // LINEユーザー取得
         $users = User::get();
 
         // LINEBOTSDKの設定
         $http_client = new CurlHTTPClient(config('services.line.channel_token'));
         $bot = new LINEBot($http_client, ['channelSecret' => config('services.line.messenger_secret')]);
 
-
-        // LINEユーザーID指定
-
         // メッセージ設定
-        $message = "本日発注締切日です。まだの方はお願いします。";
+        $title = $tomorrow."の発注締切日です。";
+        $message = $tomorrow."の発注締切日です。まだの方は17:00までにお願いいたします。";
 
-        // メッセージ送信
-        $textMessageBuilder = new TextMessageBuilder($message);
+        // メッセージ作成
+        $button = new ButtonTemplateBuilder($title, $message, null, [
+            new TemplateActionBuilder\UriTemplateActionBuilder("発注する", route("linelogin"))
+        ]);
+        $button_message = new TemplateMessageBuilder('発注締切のお知らせ', $button);
+        
+        // LINEユーザーID指定-送信
         foreach ($users as $user) {
             $userId = $user->line_id;
-            $response    = $bot->pushMessage($userId, $textMessageBuilder);
+            $response = $bot->pushMessage($userId, $button_message);
         }
         return Command::SUCCESS;
     }
