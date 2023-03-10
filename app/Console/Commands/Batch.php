@@ -56,7 +56,7 @@ class Batch extends Command
 
         // メッセージ作成
         $button = new ButtonTemplateBuilder($title, $message, null, [
-            new TemplateActionBuilder\UriTemplateActionBuilder("発注する", route("linelogin"))
+            new TemplateActionBuilder\UriTemplateActionBuilder("発注する", route("guest.fromLine"))
         ]);
         $button_message = new TemplateMessageBuilder('発注締切のお知らせ', $button);
         
