@@ -21,7 +21,7 @@ use App\Http\Controllers\OrderController;
 
 Route::get('/line', function () {
     return view('guest.fromLine');
-});
+})->name('linestart');
 
 Auth::routes();
 
