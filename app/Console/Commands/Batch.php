@@ -42,11 +42,11 @@ class Batch extends Command
     public function handle()
     {
         $today = Carbon::today();
-        $checkMon = $today->isMonday();
-        $checkWed = $today->isWednesday();
-        $checkFri = $today->isFriday();
+        $checkSun = $today->isSunday();
+        $checkThr = $today->isThursday();
+        $checkTue = $today->isTuesday();
 
-        if ($checkMon || $checkWed || $checkFri) {
+        if ($checkSun || $checkThr || $checkTue) {
 
             $tomorrow = Carbon::tomorrow()->format('n月j日');
 
