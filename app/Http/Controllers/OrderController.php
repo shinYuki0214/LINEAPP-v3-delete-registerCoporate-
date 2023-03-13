@@ -20,9 +20,20 @@ class OrderController extends Controller
         $orderdDatas = Order::where('user_id', '=', Auth::id())->whereDate('receive_date', $targetDate)->first();
         return view('order.index', compact('orderdDatas','receive_date','targetDate'));
     }
-    public function create($receive_date)
+    public function create(Request $request)
     {
-        $dateRecive = new Carbon($receive_date);
+        if(!isset($request['receive_date'])){
+            $today = Carbon::today();
+            $todayFormated = $today->format('Y-m-d');
+            $orderdDatesCheck = Order::where('user_id', '=', Auth::id())->whereDate('receive_date', '>=', $todayFormated)->exists();
+            $orderdDates = '';
+            if ($orderdDatesCheck) {
+                $orderdDates = Order::where('user_id', '=', Auth::id())->whereDate('receive_date', '>=', $todayFormated)->orderBy('receive_date', 'asc')->get();
+            }
+            return view('home', compact('orderdDates', 'orderdDatesCheck'));
+            exit;
+        }
+        $dateRecive = new Carbon($request['receive_date']);
         $today = Carbon::today();
         $tomorrow = Carbon::tomorrow();
 

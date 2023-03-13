@@ -33,15 +33,13 @@ class HomeController extends Controller
             return to_route('lineregister.index');
         } else {
             $today = Carbon::today();
-            $nextMonday = $today->copy()->next(Carbon::MONDAY);
-            $nextWednesday = $today->copy()->next(Carbon::WEDNESDAY);
-            $nextFriday = $today->copy()->next(Carbon::FRIDAY);
-    
-            $tommorow =  Carbon::tomorrow();
-            $mondayOrder = Order::where('user_id', '=', Auth::id())->whereDate('receive_date', $nextMonday)->exists();
-            $wedenesdayOrder = Order::where('user_id', '=', Auth::id())->whereDate('receive_date', $nextWednesday)->exists();
-            $fridayOrder = Order::where('user_id', '=', Auth::id())->whereDate('receive_date', $nextFriday)->exists();
-            return view('home',compact('tommorow','mondayOrder','wedenesdayOrder','fridayOrder'));
+            $todayFormated = $today->format('Y-m-d');
+            $orderdDatesCheck = Order::where('user_id', '=', Auth::id())->whereDate('receive_date', '>=', $todayFormated)->exists();
+            $orderdDates = '';
+            if ($orderdDatesCheck) {
+                $orderdDates = Order::where('user_id', '=', Auth::id())->whereDate('receive_date', '>=', $todayFormated)->orderBy('receive_date', 'asc')->get();
+            }
+            return view('home', compact('orderdDates', 'orderdDatesCheck'));
         }
     }
 }

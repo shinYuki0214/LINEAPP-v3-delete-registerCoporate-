@@ -6,4 +6,8 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+@import "../../node_modules/flatpickr/dist/themes/airbnb.css";
+@import "../../node_modules/flatpickr/dist/plugins/monthSelect/style.css";
+
 @import 'style';
+@import 'original';

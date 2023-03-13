@@ -44,9 +44,9 @@ Route::post('/lineregister', [RegisterFromLINEController::class, 'update'])->nam
 //ログインユーザー以上
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/order/{receive_date}', [OrderController::class, 'index'])->name('order.index');
-    Route::get('/order/create/{receive_date}', [OrderController::class, 'create'])->name('order.create');
+    Route::post('/order/create/', [OrderController::class, 'create'])->name('order.create');
     Route::post('/order/check', [OrderController::class, 'check'])->name('order.check');
-    Route::post('/order/create', [OrderController::class, 'store'])->name('order.store');
+    Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
 });
 
 // マネージャー以上

@@ -1,8 +1,19 @@
 @extends('layouts.app2')
-@section('sectiontitle', $dateRecive->format('Y年m月d日の発注'))
+@section('sectiontitle', '配達日：'.$dateRecive->format('m月d日'))
 
 @section('content')
     <div class="container">
+        <div class="frm__flow">
+            <a href="{{route('home')}}" class="frm__flow-item">
+                配送日選択
+            </a>
+            <div class="frm__flow-item frm__flow-item-active">
+                商品選択
+            </div>
+            <div class="frm__flow-item">
+                確認
+            </div>
+        </div>
         <form action="{{ route('order.check') }}" method="post">
             @csrf
             <div class="table-responsive">
