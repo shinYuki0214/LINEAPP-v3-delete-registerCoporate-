@@ -36,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
         $nextFriday = $today->copy()->next(Carbon::FRIDAY);
 
 
+
         view()->share('Global_recived_date', $Global_recived_date);
         // view()->share('orderDate', $orderDate);
         view()->share('nextMonday', $nextMonday);

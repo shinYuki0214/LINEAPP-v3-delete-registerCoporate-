@@ -35,6 +35,12 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role > 0 && $user->role <= 9;
         });
 
+
+        Gate::define('is_top', function () {
+            $pages = ['home',];
+            return request()->routeIs($pages);
+        });
+
         //
     }
 }

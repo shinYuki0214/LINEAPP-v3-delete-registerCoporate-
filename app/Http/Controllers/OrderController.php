@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Product;
 
 use Illuminate\Support\Facades\DB;
 
@@ -14,14 +15,19 @@ use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
     //
-    public function index($receive_date)
+    public function index($order_id){
+        $products = Product::all();
+        $ordered = Order::where('user_id', '=', Auth::id())->where('id', '=', $order_id)->first();
+        return view('order.index',compact('ordered','products'));
+    }
+    public function register()
     {
-        $targetDate = new Carbon($receive_date);
-        $orderdDatas = Order::where('user_id', '=', Auth::id())->whereDate('receive_date', $targetDate)->first();
-        return view('order.index', compact('orderdDatas','receive_date','targetDate'));
+        $products = Product::all();
+        return view('order.register', compact('products'));
     }
     public function create(Request $request)
     {
+        $products = Auth::user()->bookmark_products()->orderBy('created_at', 'desc')->get();
         if(!isset($request['receive_date'])){
             $today = Carbon::today();
             $todayFormated = $today->format('Y-m-d');
@@ -37,14 +43,15 @@ class OrderController extends Controller
         $today = Carbon::today();
         $tomorrow = Carbon::tomorrow();
 
-        return view('order.create',compact('today','tomorrow','dateRecive'));
+        return view('order.create',compact('today','tomorrow','dateRecive','products'));
     }
     public function check(Request $request){
+        $products = Auth::user()->bookmark_products()->orderBy('created_at', 'desc')->get();
         $today = Carbon::today();
         $tomorrow = Carbon::tomorrow();
         $orderdDatas = $request;
         $dateRecive = new Carbon($request['receive_date']);
-        return view('order.check', compact('orderdDatas','dateRecive'));
+        return view('order.check', compact('orderdDatas','dateRecive','products'));
     }
     public function store(Request $request)
     {

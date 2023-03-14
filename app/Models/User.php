@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Order;
+use App\Models\Products;
+use App\Models\useProduct;
 use Carbon\Carbon;
 
 class User extends Authenticatable
@@ -50,18 +52,26 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
-    public function todaysOrder(){
+    public function todaysOrder()
+    {
         return $this->hasMany(Order::class);
     }
 
-    // public function checkedOrders(){
-    //     $check = false;
-    //     $orderDatas = $this->orders;
-    //     foreach($orderDatas as $order){
-    //         if($order->order_status != '' || is_null(!$order->order_status)){
-    //             $check = true;
-    //         }
-    //     }
-    //     return $check;
-    // }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function bookmarks()
+    {
+        return $this->hasMany(useProducts::class);
+    }
+    public function bookmark_products()
+    {
+        return $this->belongsToMany(Product::class, 'use_products', 'user_id', 'product_id');
+    }
+    public function is_bookmark($productId)
+    {
+        return $this->bookmarks()->where('product_id', $productId)->exists();
+    }
 }

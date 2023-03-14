@@ -35,14 +35,23 @@
 </head>
 
 <body>
+    <div class="top__wrapper">
+        @cannot('is_top')
+        <div class="top__inner">
+            <a href="{{route('home')}}" class="top__btn-01">
+                トップに戻る
+            </a>
+        </div>
+        @endcannot
+    </div>
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
         @can('manager-higher')
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{{route('manager.index')}}">発注システム</a>
-        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
-            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{{ route('manager.index') }}">発注システム</a>
+            <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         @endcan
         {{-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> --}}
         <div class="navbar-nav">
@@ -63,60 +72,75 @@
 
     <div class="container-fluid">
         <div class="row">
-            
-            @can('manager-higher')
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                <div class="position-sticky pt-3">
-                    <ul class="nav flex-column">
-                        @can('manager-higher')
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('manager.index') }}">
-                                <span data-feather="home"></span>
-                                お客様一覧
-                            </a>
-                        </li>
-                        @php
-                            $beforeDate = $Global_recived_date;
-                            $theDate = $Global_recived_date;
-                            $afterDate = $Global_recived_date;
-                        @endphp
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('manager.order.index',$nextMonday) }}">
-                                <span data-feather="file"></span>
-                                月曜日の配達
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('manager.order.index',$nextWednesday) }}">
-                                <span data-feather="file"></span>
-                                水曜日の配達
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('manager.order.index',$nextFriday) }}">
-                                <span data-feather="file"></span>
-                                金曜日の配達
-                            </a>
-                        </li>
-                        @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('order.index')}}">
-                                <span data-feather="file"></span>
-                                発注状況
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('order.create')}}">
-                                <span data-feather="file"></span>
-                                発注
-                            </a>
-                        </li>
-                        @endcan
-                    </ul>
 
-                </div>
-            </nav>
+            @can('manager-higher')
+                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                    <div class="position-sticky pt-3">
+                        <ul class="nav flex-column">
+                            @can('manager-higher')
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="{{ route('manager.index') }}">
+                                        <span data-feather="home"></span>
+                                        お客様一覧
+                                    </a>
+                                </li>
+                                @php
+                                    $beforeDate = $Global_recived_date;
+                                    $theDate = $Global_recived_date;
+                                    $afterDate = $Global_recived_date;
+                                @endphp
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('manager.order.index', $nextMonday) }}">
+                                        <span data-feather="file"></span>
+                                        月曜日の配達
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('manager.order.index', $nextWednesday) }}">
+                                        <span data-feather="file"></span>
+                                        水曜日の配達
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('manager.order.index', $nextFriday) }}">
+                                        <span data-feather="file"></span>
+                                        金曜日の配達
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('product.index') }}">
+                                        <span data-feather="file"></span>
+                                        登録商品一覧
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('product.create') }}">
+                                        <span data-feather="file"></span>
+                                        商品登録
+                                    </a>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('order.index') }}">
+                                        <span data-feather="file"></span>
+                                        発注状況
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('order.create') }}">
+                                        <span data-feather="file"></span>
+                                        発注
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+
+                    </div>
+                </nav>
+                @else
+
             @endcan
+            
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">

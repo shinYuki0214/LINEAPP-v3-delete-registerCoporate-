@@ -36,9 +36,9 @@
                         {{ old('remember') ? 'checked' : '' }}>Remember me
                 </label>
             </div>
-            <button class="w-100 btn btn-lg btn-primary mb-3" type="submit">ログイン</button>
+            <button class="w-100 btn btn-primary mb-3" type="submit">ログイン</button>
         </form>
-        <a href="{{ route('linelogin') }}" class="w-100 btn btn-lg btn-success" type="submit">LINEでログイン</a>
+        <a href="{{ route('linelogin') }}" class="w-100 btn btn-success" type="submit">LINEでログイン</a>
         <p class="mt-5 mb-3 text-muted">&copy; 2023 montedoll</p>
     </main>
 </div>
