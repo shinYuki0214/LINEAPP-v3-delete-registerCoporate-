@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 
 
@@ -22,7 +23,8 @@ class ManagerUserController extends Controller
     public function show($id){
         // dd($id);
         $theUser = User::findOrfail($id);
-        return view('manager.users.show',compact('theUser'));
+        $products = Product::all();
+        return view('manager.users.show',compact('theUser','products'));
     }
 
 }

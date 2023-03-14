@@ -98,6 +98,10 @@ class OrderController extends Controller
         }
 
         session()->flash('status', '登録okです');
-        return to_route('home');
+        return to_route('order.finish');
+    }
+
+    public function finish(){
+        return view('order.finish');
     }
 }

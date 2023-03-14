@@ -32,3 +32,20 @@ flatpickr(".js__calendar", {
         },
     ],
 });
+flatpickr(".js__calendar2", {
+    locale: Japanese,
+    dateFormat: "Y-m-d",
+    minDate: 'today' ,
+    maxDate: new Date().fp_incr(14),
+    disable: [
+        function (date) {
+            // return true to disable
+            return (
+                date.getDay() === 0 ||
+                date.getDay() === 2 ||
+                date.getDay() === 4 ||
+                date.getDay() === 6
+            );
+        },
+    ],
+});

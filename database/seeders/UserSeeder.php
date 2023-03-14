@@ -32,13 +32,13 @@ class UserSeeder extends Seeder
                 'password'=>Hash::make('password123'),
                 'role' => 5,
             ],
-            [
-                'name'=>'test',
-                'line_name'=>'ラインとは連携してません',
-                'email'=>'test@test.com',
-                'password'=>Hash::make('password123'),
-                'role' => 9,
-            ],
+            // [
+            //     'name'=>'test',
+            //     'line_name'=>'ラインとは連携してません',
+            //     'email'=>'test@test.com',
+            //     'password'=>Hash::make('password123'),
+            //     'role' => 9,
+            // ],
         ]);
     }
 }

@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/order/create/', [OrderController::class, 'create'])->name('order.create');
     Route::post('/order/check', [OrderController::class, 'check'])->name('order.check');
     Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
+    Route::get('/order/finish', [OrderController::class, 'finish'])->name('order.finish');
     Route::get('/order/{order_id}', [OrderController::class, 'index'])->name('order.index');
 });
 
@@ -58,16 +59,15 @@ Route::prefix('manager')
     ->middleware('can:manager-higher')
     ->group(function () {
         Route::get('/', [ManagerUserController::class, 'index'])->name('manager.index');
-        Route::get('/ordered/yesterday', [ManagerOrderController::class, 'yesterday'])->name('manager.order.yesterday');
-        Route::get('/ordered/tomorrow', [ManagerOrderController::class, 'tomorrow'])->name('manager.order.tomorrow');
-        Route::get('/ordered/{receive_date}', [ManagerOrderController::class, 'index'])->name('manager.order.index');
+        Route::get('/ordered/selectdate', [ManagerOrderController::class, 'selectdate'])->name('manager.order.selectdate');
         // Route::post('/ordered', [ManagerOrderController::class, 'update'])->name('manager.order.update');
         Route::get('/past', [ManagerOrderController::class, 'past'])->name('manager.order.past');
-        Route::get('/show/{id}', [ManagerUserController::class, 'show'])->name('manager.show');
         // Route::get('/', [ManagerUserController::class, 'show'])->name('manager.show');
         Route::get('/products', [ProductController::class, 'index'])->name('product.index');
         Route::get('/products/create', [ProductController::class, 'create'])->name('product.create');
         Route::post('/products/create', [ProductController::class, 'store'])->name('product.store');
+        Route::get('/show/{id}', [ManagerUserController::class, 'show'])->name('manager.show');
+        Route::get('/ordered', [ManagerOrderController::class, 'index'])->name('manager.order.index');
     });
 // 管理者のみ
 

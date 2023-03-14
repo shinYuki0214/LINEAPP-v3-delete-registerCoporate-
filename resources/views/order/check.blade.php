@@ -3,6 +3,17 @@
 
 @section('content')
     <div class="col-md-5">
+        <div class="frm__flow">
+            <a href="{{ route('home') }}" class="frm__flow-item">
+                配送日選択
+            </a>
+            <div class="frm__flow-item">
+                注文
+            </div>
+            <div class="frm__flow-item frm__flow-item-active">
+                確認
+            </div>
+        </div>
         @csrf
         <div class="table-responsive">
             <table class="table table-striped table-sm">

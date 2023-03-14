@@ -89,22 +89,16 @@
                                     $theDate = $Global_recived_date;
                                     $afterDate = $Global_recived_date;
                                 @endphp
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a class="nav-link" href="{{ route('manager.order.index', $nextMonday) }}">
                                         <span data-feather="file"></span>
                                         月曜日の配達
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('manager.order.index', $nextWednesday) }}">
+                                    <a class="nav-link" href="{{ route('manager.order.selectdate') }}">
                                         <span data-feather="file"></span>
-                                        水曜日の配達
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('manager.order.index', $nextFriday) }}">
-                                        <span data-feather="file"></span>
-                                        金曜日の配達
+                                        発注確認
                                     </a>
                                 </li>
                                 <li class="nav-item">

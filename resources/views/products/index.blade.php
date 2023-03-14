@@ -7,7 +7,7 @@
             <table class="table table-striped table-sm text-center table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">商品画像</th>
+                        <th scope="col" style="width:100px;">商品画像</th>
                         <th scope="col">商品名</th>
                         <th scope="col">商品料金</th>
                     </tr>
@@ -25,7 +25,7 @@
                                 @endif
                             </td>
                             <td>{{ $product->product_name }}</td>
-                            <td>{{ $product->product_price }}</td>
+                            <td>{{ $product->product_price }}円</td>
                         </tr>
                     @endforeach
 

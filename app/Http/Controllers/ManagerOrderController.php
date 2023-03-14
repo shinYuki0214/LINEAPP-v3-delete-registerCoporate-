@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -12,35 +13,19 @@ use Carbon\Carbon;
 class ManagerOrderController extends Controller
 {
     //
-    public function index($receive_date){
-        $receive_date = new Carbon($receive_date);
+    public function selectdate(){
+        return view('manager.orders.selectdate');
+    }
+    
+
+    public function index(Request $request){
+        $receive_date = new Carbon($request->receive_date);
         $today=Carbon::today();
         $tommorow =  Carbon::tomorrow();
         // $users = User::orderBy('id', 'desc')->get();
         $users = User::where('role','>=','9')->orderBy('id', 'desc')->get();
 
-        return view('manager.orders.index',compact('users','receive_date'));
+        $products = Product::all();
+        return view('manager.orders.index',compact('users','receive_date','products'));
     }
-    
-    // public function update(Request $request){
-    //     $needChangeDatas = $request->change_status;
-    //     // dd($needChangeDatas);
-    //     $param = [
-    //         'order_status' => '処理済み',
-    //     ];
-
-    //     foreach($needChangeDatas as $theOrderId){
-    //         Order::where('id','=',$theOrderId)
-    //         ->update($param);
-    //     }
-    //     return redirect('/manager/ordered');
-    // }
-    // public function past(){
-    //     // $users = User::orderBy('id', 'desc')->get();
-    //     $users = User::where('role','>=','9')->orderBy('id', 'desc')->get();
-
-    //     $orderdDatas = Order::whereNotNull('order_status')
-    //     ->get();
-    //     return view('manager.orders.past',compact('orderdDatas','users'));
-    // }
 }

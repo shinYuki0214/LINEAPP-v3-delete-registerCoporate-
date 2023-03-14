@@ -2,7 +2,7 @@
 @section('sectiontitle', $theUser->name . ' 様')
 @section('content')
     <div class="table-responsive">
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm table-bordered">
             <thead>
                 <tr>
                     <th scope="col">会社名</th>
@@ -22,24 +22,17 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table table-striped table-sm text-center">
+        <table class="table table-striped table-sm text-center table-bordered">
             <thead>
                 <tr>
                     <th>配達日</th>
-                    <th scope="col">バナナケーキ</th>
-                    <th scope="col">ミニバナナケーキ</th>
-                    <th scope="col">ミニバナナケーキ　6個入</th>
-                    <th scope="col">バナナケーキ（ポケモン）</th>
-                    <th scope="col">ミニバナナケーキ6個入（ポケモン）</th>
-                    <th scope="col">美ら恋ガレット単品</th>
-                    <th scope="col">美ら恋ガレット4個入り</th>
-                    <th scope="col">美ら恋ガレット８個入り</th>
-                    <th scope="col">宮古島スティック　バナナ</th>
-                    <th scope="col">宮古島スティック　紅芋黒糖</th>
-                    <th scope="col">宮古島スティック　黒糖</th>
-                    <th scope="col">下地島専用宮古島スティック　6本入</th>
-                    <th scope="col">バナナラスク　25ｇ</th>
-                    <th scope="col">バナナラスク　3個入</th>
+                    @foreach ($products as $product)
+                        <td>
+                            {{ $product->product_name }}
+                        </td>
+                    @endforeach
+                    <th>作成日</th>
+                    <th>更新日</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,22 +45,21 @@
                                 @endphp
                             </span>
                         </td>
-                        <td> {{ $order->order1 }}</td>
-                        <td> {{ $order->order2 }}</td>
-                        <td> {{ $order->order3 }}</td>
-                        <td> {{ $order->order4 }}</td>
-                        <td> {{ $order->order5 }}</td>
-                        <td> {{ $order->order6 }}</td>
-                        <td> {{ $order->order7 }}</td>
-                        <td> {{ $order->order8 }}</td>
-                        <td> {{ $order->order9 }}</td>
-                        <td> {{ $order->order10 }}</td>
-                        <td> {{ $order->order11 }}</td>
-                        <td> {{ $order->order12 }}</td>
-                        <td> {{ $order->order13 }}</td>
-                        <td> {{ $order->order14 }}</td>
+
+                        @foreach ($products as $product)
+                            <td>
+                                @if (isset($order['order' . $product->id]))
+                                    {{ $order['order' . $product->id] }}
+                                @else
+                                    -
+                                @endif
+                            </td>
+                        @endforeach
+                        <td>{{ $order->created_at }}</td>
+                        <td>{{ $order->updated_at }}</td>
                     </tr>
                 @endforeach
+
             </tbody>
         </table>
     </div>
