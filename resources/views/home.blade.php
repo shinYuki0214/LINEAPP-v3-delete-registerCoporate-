@@ -29,11 +29,16 @@
                     発注済み
                 </div>
                 <div class="card-body">
+                    @php
+                        $nousedates = [];
+                    @endphp
                     @if ($orderdDatesCheck)
                         @foreach ($orderdDates as $orderdDate)
                             @php
                                 $_theDate = new Carbon\Carbon($orderdDate->receive_date);
-                                $theDate = $_theDate->format('n月j日');
+                                $theDate = $_theDate->copy()->format('n月j日');
+                                $nouseDates = $_theDate->copy()->format('Y-m-d');
+                                array_push($nousedates,$nouseDates);
                             @endphp
                             <a href="{{ route('order.index', $orderdDate->id) }}">{{ $theDate }}</a>,
                         @endforeach
@@ -50,4 +55,7 @@
             </div>
         </div>
     @endcan
+
+   
+    <input type="hidden" name="nousedate" id="nousedate" value="@foreach($nousedates as $nousedate){{$nousedate.','}}@endforeach">
 @endsection

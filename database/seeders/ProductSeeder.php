@@ -59,6 +59,26 @@ class ProductSeeder extends Seeder
                 'product_img' => 'items/product9.png',
             ],
             [
+                'product_name' => '宮古島スティック バナナ',
+                'product_price' => '172',
+                'product_img' => 'items/noImage.png',
+            ],
+            [
+                'product_name' => '宮古島スティック 紅芋黒糖',
+                'product_price' => '172',
+                'product_img' => 'items/noImage.png',
+            ],
+            [
+                'product_name' => '宮古島スティック 黒糖',
+                'product_price' => '172',
+                'product_img' => 'items/noImage.png',
+            ],
+            [
+                'product_name' => '下地島専用宮古島スティック 6本入',
+                'product_price' => '1036',
+                'product_img' => 'items/noImage.png',
+            ],
+            [
                 'product_name' => 'バナナラスク 25g',
                 'product_price' => '230',
                 'product_img' => 'items/product10.png',

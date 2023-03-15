@@ -30,6 +30,12 @@ return new class extends Migration
             $table->integer('order12')->nullable();
             $table->integer('order13')->nullable();
             $table->integer('order14')->nullable();
+            $table->integer('order15')->nullable();
+            $table->integer('order16')->nullable();
+            $table->integer('order17')->nullable();
+            $table->integer('order18')->nullable();
+            $table->integer('order19')->nullable();
+            $table->integer('order20')->nullable();
             $table->date('receive_date');
             $table->timestamps();
         });

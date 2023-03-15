@@ -74,6 +74,12 @@ class OrderController extends Controller
                 'order12' => $request['order12'],
                 'order13' => $request['order13'],
                 'order14' => $request['order14'],
+                'order15' => $request['order15'],
+                'order16' => $request['order16'],
+                'order17' => $request['order17'],
+                'order18' => $request['order18'],
+                'order19' => $request['order19'],
+                'order20' => $request['order20'],
                 'receive_date' => $request['receive_date'],
             ]);
         } else {
@@ -93,6 +99,12 @@ class OrderController extends Controller
                     'order12' => $request['order12'],
                     'order13' => $request['order13'],
                     'order14' => $request['order14'],
+                    'order15' => $request['order15'],
+                    'order16' => $request['order16'],
+                    'order17' => $request['order17'],
+                    'order18' => $request['order18'],
+                    'order19' => $request['order19'],
+                    'order20' => $request['order20'],
                 ]
             );
         }
