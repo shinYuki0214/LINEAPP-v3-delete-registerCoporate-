@@ -29,9 +29,9 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         // dd($user->name);
-        if (($user->name == '')) {
-            return to_route('lineregister.index');
-        } else {
+        // if (($user->name == '')) {
+        //     return to_route('lineregister.index');
+        // } else {
             $today = Carbon::today();
             $todayFormated = $today->format('Y-m-d');
             $orderdDatesCheck = Order::where('user_id', '=', Auth::id())->whereDate('receive_date', '>=', $todayFormated)->exists();
@@ -40,6 +40,6 @@ class HomeController extends Controller
                 $orderdDates = Order::where('user_id', '=', Auth::id())->whereDate('receive_date', '>=', $todayFormated)->orderBy('receive_date', 'asc')->get();
             }
             return view('home', compact('orderdDates', 'orderdDatesCheck'));
-        }
+        // }
     }
 }

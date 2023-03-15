@@ -3,17 +3,6 @@ import flatpickr from "flatpickr";
 import monthSelectPlugin from "flatpickr/dist/plugins/monthSelect/index";
 import { Japanese } from "flatpickr/dist/l10n/ja.js";
 import { left } from "@popperjs/core";
-// creates multiple instances
-var input = document.getElementById("nousedate");
-var value = input.getAttribute("value");
-// 配列
-let nouseDates = value.split(",");
-let dateTextArray = [];
-nouseDates.forEach(element=>{
-    let dateText = String('"' + element + '"');
-    // console.log(dateText)
-    dateTextArray.push(dateText);
-});
 var now = new Date();
 var Hour = now.getHours();
 let overDeadTime = Hour < 17;

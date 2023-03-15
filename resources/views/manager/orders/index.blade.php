@@ -5,7 +5,7 @@
         <table class="table table-striped table-sm text-center table-bordered">
             <thead>
                 <tr>
-                    <th>会社名</th>
+                    <th>ユーザー名</th>
                     @foreach ($products as $product)
                         <td>
                             {{ $product->product_name }}
@@ -20,7 +20,7 @@
                     @foreach ($user->orders as $order)
                         <tr>
                             @if ($receive_date->isSameDay($order->receive_date))
-                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->line_name }}</td>
                                 @foreach ($products as $product)
                                     <td>
                                         @if (isset($order['order' . $product->id]))

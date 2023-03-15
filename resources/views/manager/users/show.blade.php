@@ -1,21 +1,21 @@
 @extends('layouts.app2')
-@section('sectiontitle', $theUser->name . ' 様')
+@section('sectiontitle', $theUser->line_name . ' 様')
 @section('content')
     <div class="table-responsive">
         <table class="table table-striped table-sm table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">会社名</th>
+                    {{-- <th scope="col">会社名</th> --}}
                     <th scope="col">ライン名</th>
-                    <th scope="col">メールアドレス</th>
+                    {{-- <th scope="col">メールアドレス</th> --}}
                 </tr>
             </thead>
             <tbody>
 
                 <tr>
-                    <td>{{ $theUser->name }}</td>
+                    {{-- <td>{{ $theUser->name }}</td> --}}
                     <td>{{ $theUser->line_name }}</td>
-                    <td>{{ $theUser->email }}</td>
+                    {{-- <td>{{ $theUser->email }}</td> --}}
                 </tr>
             </tbody>
         </table>
