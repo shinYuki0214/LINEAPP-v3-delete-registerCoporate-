@@ -19,6 +19,7 @@
             <table class="table table-striped table-sm">
                 <thead>
                     <tr>
+                        <th scope="col">商品画像</th>
                         <th scope="col">商品名</th>
                         <th scope="col">金額</th>
                         <th scope="col">個数</th>
@@ -27,6 +28,13 @@
                 <tbody>
                     @foreach ($products as $product)
                         <tr>
+                            <td rowspan="2" style="width:100px;">
+                                @if ($product->product_img !== '')
+                                    <img src="{{ \Storage::url($product->product_img) }}" class="products__img">
+                                @else
+                                    <img src="/img/noImage.png" class="products__img">
+                                @endif
+                            </td>
                             <td> {{ $product->product_name }}</td>
                             <td> {{ $product->product_price }}</td>
                             <td>

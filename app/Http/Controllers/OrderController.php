@@ -56,6 +56,7 @@ class OrderController extends Controller
     }
     public function check(Request $request)
     {
+
         $products = Auth::user()->bookmark_products()->orderBy('created_at', 'desc')->get();
         $today = Carbon::today();
         $tomorrow = Carbon::tomorrow();
