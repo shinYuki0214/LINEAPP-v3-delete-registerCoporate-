@@ -28,7 +28,7 @@ flatpickr(".js__calendar", {
             );
         }
     ],
-    position:above,
+    position:"above",
 });
 flatpickr(".js__calendar2", {
     locale: Japanese,
@@ -46,5 +46,5 @@ flatpickr(".js__calendar2", {
             );
         },
     ],
-    position:above,
+    position:"above",
 });
