@@ -46,7 +46,7 @@ class Batch extends Command
         $checkThr = $today->isThursday();
         $checkTue = $today->isTuesday();
 
-        if ($checkSun || $checkThr || $checkTue) {
+        // if ($checkSun || $checkThr || $checkTue) {
 
             $tomorrow = Carbon::tomorrow()->format('n月j日');
 
@@ -72,7 +72,7 @@ class Batch extends Command
                 $userId = $user->line_id;
                 $response = $bot->pushMessage($userId, $button_message);
             }
-        }
+        // }
         return Command::SUCCESS;
     }
 }
