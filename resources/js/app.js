@@ -46,5 +46,4 @@ flatpickr(".js__calendar2", {
             );
         },
     ],
-    position:"above",
 });
