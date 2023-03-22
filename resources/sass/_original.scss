@@ -50,3 +50,46 @@
 body{
     padding-bottom: 90px;
 }
+
+.nav-sp__wrapper{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.nav-sp__inner{
+    display: flex;
+}
+.nav-sp__btn-01{
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background-color: #eee;
+    // color: #fff;
+}
+.nav-sp__btn-02{
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background-color: #2061a8;
+    color: #fff;
+}
+
+.frm__btn-02{
+    display: block;
+    width: 100%;
+    padding: 16px;
+    border: none;
+    background-color: #198754;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 18px;
+}
+
+.frm__error{
+    color: red;
+}

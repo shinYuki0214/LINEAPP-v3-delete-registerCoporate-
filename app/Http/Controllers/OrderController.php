@@ -15,10 +15,11 @@ use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
     //
-    public function index($order_id){
+    public function index($order_id)
+    {
         $products = Product::all();
         $ordered = Order::where('user_id', '=', Auth::id())->where('id', '=', $order_id)->first();
-        return view('order.index',compact('ordered','products'));
+        return view('order.index', compact('ordered', 'products'));
     }
     public function register()
     {
@@ -28,30 +29,39 @@ class OrderController extends Controller
     public function create(Request $request)
     {
         $products = Auth::user()->bookmark_products()->orderBy('created_at', 'desc')->get();
-        if(!isset($request['receive_date'])){
-            $today = Carbon::today();
-            $todayFormated = $today->format('Y-m-d');
-            $orderdDatesCheck = Order::where('user_id', '=', Auth::id())->whereDate('receive_date', '>=', $todayFormated)->exists();
-            $orderdDates = '';
-            if ($orderdDatesCheck) {
-                $orderdDates = Order::where('user_id', '=', Auth::id())->whereDate('receive_date', '>=', $todayFormated)->orderBy('receive_date', 'asc')->get();
-            }
-            return view('home', compact('orderdDates', 'orderdDatesCheck'));
+        $productsCount = Auth::user()->bookmark_products()->orderBy('created_at', 'desc')->count();
+        // if(!isset($request['receive_date'])){
+        //     $today = Carbon::today();
+        //     $todayFormated = $today->format('Y-m-d');
+        //     $orderdDatesCheck = Order::where('user_id', '=', Auth::id())->whereDate('receive_date', '>=', $todayFormated)->exists();
+        //     $orderdDates = '';
+        //     if ($orderdDatesCheck) {
+        //         $orderdDates = Order::where('user_id', '=', Auth::id())->whereDate('receive_date', '>=', $todayFormated)->orderBy('receive_date', 'asc')->get();
+        //     }
+        //     return view('home', compact('orderdDates', 'orderdDatesCheck'));
+        //     exit;
+        // }
+
+        if ($request['receive_date'] == '') {
+            session()->flash('status', '日付を選択してください。');
+            return to_route('home');
             exit;
         }
+
         $dateRecive = new Carbon($request['receive_date']);
         $today = Carbon::today();
         $tomorrow = Carbon::tomorrow();
 
-        return view('order.create',compact('today','tomorrow','dateRecive','products'));
+        return view('order.create', compact('today', 'tomorrow', 'dateRecive', 'products','productsCount'));
     }
-    public function check(Request $request){
+    public function check(Request $request)
+    {
         $products = Auth::user()->bookmark_products()->orderBy('created_at', 'desc')->get();
         $today = Carbon::today();
         $tomorrow = Carbon::tomorrow();
         $orderdDatas = $request;
         $dateRecive = new Carbon($request['receive_date']);
-        return view('order.check', compact('orderdDatas','dateRecive','products'));
+        return view('order.check', compact('orderdDatas', 'dateRecive', 'products'));
     }
     public function store(Request $request)
     {
@@ -113,7 +123,8 @@ class OrderController extends Controller
         return to_route('order.finish');
     }
 
-    public function finish(){
+    public function finish()
+    {
         return view('order.finish');
     }
 }

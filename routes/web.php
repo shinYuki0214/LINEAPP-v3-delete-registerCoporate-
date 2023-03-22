@@ -28,6 +28,7 @@ Route::get('/line', function () {
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/pastDatas', [App\Http\Controllers\HomeController::class, 'pastDatas'])->name('pastDatas');
 
 
 // ラインログイン用

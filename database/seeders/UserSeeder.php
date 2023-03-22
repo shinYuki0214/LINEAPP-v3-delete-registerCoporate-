@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
                 'name'=>'admin',
                 'line_name'=>'ラインとは連携してません',
                 'email'=>'admin@admin.com',
-                'password'=>Hash::make('password123'),
+                'password'=>Hash::make('doragon877Gurukun'),
                 'role'=> 1
                 ],
             [
@@ -32,13 +32,13 @@ class UserSeeder extends Seeder
                 'password'=>Hash::make('password123'),
                 'role' => 5,
             ],
-            // [
-            //     'name'=>'test',
-            //     'line_name'=>'ラインとは連携してません',
-            //     'email'=>'test@test.com',
-            //     'password'=>Hash::make('password123'),
-            //     'role' => 9,
-            // ],
+            [
+                'name'=>'test',
+                'line_name'=>'ラインとは連携してません',
+                'email'=>'test@test.com',
+                'password'=>Hash::make('password123'),
+                'role' => 9,
+            ],
         ]);
     }
 }
