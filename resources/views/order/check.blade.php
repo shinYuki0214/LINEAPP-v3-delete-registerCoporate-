@@ -27,20 +27,22 @@
                 </thead>
                 <tbody>
                     @foreach ($products as $product)
-                        <tr>
-                            <td class="imageTh">
-                                @if ($product->product_img !== '')
-                                    <img src="{{ \Storage::url($product->product_img) }}" class="products__img">
-                                @else
-                                    <img src="/img/noImage.png" class="products__img">
-                                @endif
-                            </td>
-                            <td> {{ $product->product_name }}</td>
-                            <td> {{ $product->product_price }}</td>
-                            <td>
-                                {{ $orderdDatas['order' . $product->id] }}
-                            </td>
-                        </tr>
+                        @if (!$product->hidden)
+                            <tr>
+                                <td class="imageTh">
+                                    @if ($product->product_img !== '')
+                                        <img src="{{ \Storage::url($product->product_img) }}" class="products__img">
+                                    @else
+                                        <img src="/img/noImage.png" class="products__img">
+                                    @endif
+                                </td>
+                                <td> {{ $product->product_name }}</td>
+                                <td> {{ $product->product_price }}</td>
+                                <td>
+                                    {{ $orderdDatas['order' . $product->id] }}
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>

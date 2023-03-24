@@ -67,6 +67,10 @@ Route::prefix('manager')
         Route::get('/products', [ProductController::class, 'index'])->name('product.index');
         Route::get('/products/create', [ProductController::class, 'create'])->name('product.create');
         Route::post('/products/create', [ProductController::class, 'store'])->name('product.store');
+        Route::get('/products/show/{id}', [ProductController::class, 'show'])->name('product.show');
+        Route::post('/products/update', [ProductController::class, 'update'])->name('product.update');
+        Route::post('/products/hidden', [ProductController::class, 'hidden'])->name('product.hidden');
+        Route::post('/products/visible', [ProductController::class, 'visible'])->name('product.visible');
         Route::get('/show/{id}', [ManagerUserController::class, 'show'])->name('manager.show');
         Route::get('/ordered', [ManagerOrderController::class, 'index'])->name('manager.order.index');
     });

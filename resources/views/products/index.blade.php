@@ -10,6 +10,8 @@
                         <th scope="col" class="imageTh">商品画像</th>
                         <th scope="col">商品名</th>
                         <th scope="col">商品料金</th>
+                        <th scope="col">表示非表示</th>
+                        <th scope="col">編集</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,6 +28,24 @@
                             </td>
                             <td>{{ $product->product_name }}</td>
                             <td>{{ $product->product_price }}円</td>
+                            <td>
+                                @if($product->hidden)
+                                <form action="{{route('product.visible')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{$product->id}}">
+                                    <button class="btn btn-secondary">非表示中</button>
+                                </form>
+                                @else
+                                <form action="{{route('product.hidden')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{$product->id}}">
+                                    <button class="btn btn-success">表示中</button>
+                                </form>
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{route('product.show',$product->id)}}" class="btn btn-primary">編集</a>
+                            </td>
                         </tr>
                     @endforeach
 

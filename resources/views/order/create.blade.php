@@ -32,27 +32,29 @@
                         </thead>
                         <tbody>
                             @foreach ($products as $product)
-                                <tr>
-                                    <td rowspan="2" class="imageTh">
-                                        @if ($product->product_img !== '')
-                                            <img src="{{ \Storage::url($product->product_img) }}" class="products__img">
-                                        @else
-                                            <img src="/img/noImage.png" class="products__img">
-                                        @endif
-                                    </td>
-                                    <td>{{ $product->product_name }}</td>
-                                    <td>{{ $product->product_price }}円</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <select name="order{{ $product->id }}" id="" class="form-select">
-                                            <option value="0">注文なし</option>
-                                            @for ($i = 1; $i < 200; $i++)
-                                                <option value="{{ $i }}">{{ $i }}</option>
-                                            @endfor
-                                        </select>
-                                    </td>
-                                </tr>
+                                @if (!$product->hidden)
+                                    <tr>
+                                        <td rowspan="2" class="imageTh">
+                                            @if ($product->product_img !== '')
+                                                <img src="{{ \Storage::url($product->product_img) }}" class="products__img">
+                                            @else
+                                                <img src="/img/noImage.png" class="products__img">
+                                            @endif
+                                        </td>
+                                        <td>{{ $product->product_name }}</td>
+                                        <td>{{ $product->product_price }}円</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <select name="order{{ $product->id }}" id="" class="form-select">
+                                                <option value="0">注文なし</option>
+                                                @for ($i = 1; $i < 200; $i++)
+                                                    <option value="{{ $i }}">{{ $i }}</option>
+                                                @endfor
+                                            </select>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
 
                         </tbody>
@@ -64,9 +66,9 @@
                 <a class="btn btn-dark" href="{{ route('home') }}">戻る</a>
 
                 @if ($productsCount > 0)
-                <button class="btn btn-primary">
-                    注文
-                </button>
+                    <button class="btn btn-primary">
+                        注文
+                    </button>
                 @endif
             </div>
         </form>

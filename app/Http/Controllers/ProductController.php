@@ -13,7 +13,7 @@ class ProductController extends Controller
     {
         //
         $products = Product::all();
-        return view('products.index',compact('products'));
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -34,12 +34,24 @@ class ProductController extends Controller
         // public内のitemsフォルダに保存とパスの取得
         $path = isset($image) ? $image->store('items', 'public') : '';
         Product::create([
-            'product_name'=> $request->product_name,
-            'product_price'=> $request->product_price,
-            'product_img'=> $path,
+            'product_name' => $request->product_name,
+            'product_price' => $request->product_price,
+            'product_img' => $path,
         ]);
         return redirect('/manager/products');
+    }
 
+    public function hidden(Request $request)
+    {
+        $theProductId = $request->product_id;
+        Product::where('id', $theProductId)->update(['hidden' => 1]);
+        return to_route('product.index');
+    }
+    public function visible(Request $request)
+    {
+        $theProductId = $request->product_id;
+        Product::where('id', $theProductId)->update(['hidden' => 0]);
+        return to_route('product.index');
     }
 
     /**
@@ -48,9 +60,12 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
+        $theProductId = $id;
         //
+        $product = Product::where('id', $theProductId)->first();
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -74,6 +89,23 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //
+        //
+        $image = $request->file('product_img');
+        if (isset($image)) {
+            // public内のitemsフォルダに保存とパスの取得
+            $path = isset($image) ? $image->store('items', 'public') : '';
+            Product::where('id', $request->product_id)->update([
+                'product_name' => $request->product_name,
+                'product_price' => $request->product_price,
+                'product_img' => $path,
+            ]);
+        } else {
+            Product::where('id', $request->product_id)->update([
+                'product_name' => $request->product_name,
+                'product_price' => $request->product_price,
+            ]);
+        }
+        return to_route('product.index');
     }
 
     /**
