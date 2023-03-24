@@ -31,11 +31,23 @@
         <div class="d-flex justify-content-between">
             <a class="btn btn-dark" href="{{ route('home') }}">戻る</a>
         
+            @php
+                $now = \Carbon\Carbon::now();
+                $nowtime = $now->hour * 60 + $now->minute;
+                $targetTime = 17 * 60 + 00;
+                $tommorow = \Carbon\Carbon::tomorrow();
+                $theReciveDate = \Carbon\Carbon::parse($ordered->receive_date);
+                $checktargetDate = $tommorow->gte($theReciveDate);
+                $check17 = $nowtime > $targetTime;
+            @endphp
+            @if($check17 && $checktargetDate)
+            @else
             <form action="{{ route('order.create') }}" method="post">
                 @csrf
                 <input type="hidden" name="receive_date" value="{{ $ordered->receive_date }}">
                 <button class="btn btn-primary">変更する</button>
             </form>
+            @endif
         </div>
     </div>
 @endsection
