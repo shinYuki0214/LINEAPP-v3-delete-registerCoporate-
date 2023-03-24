@@ -28,7 +28,7 @@
                 <tbody>
                     @foreach ($products as $product)
                         <tr>
-                            <td rowspan="2" class="imageTh">
+                            <td class="imageTh">
                                 @if ($product->product_img !== '')
                                     <img src="{{ \Storage::url($product->product_img) }}" class="products__img">
                                 @else
