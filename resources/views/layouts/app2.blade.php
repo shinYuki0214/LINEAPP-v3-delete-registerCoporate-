@@ -2,8 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -37,11 +36,11 @@
 <body>
     <div class="top__wrapper">
         @cannot('is_top')
-            <div class="top__inner">
-                <a href="{{ route('home') }}" class="top__btn-01">
-                    トップに戻る
-                </a>
-            </div>
+        <div class="top__inner">
+            <a href="{{route('home')}}" class="top__btn-01">
+                トップに戻る
+            </a>
+        </div>
         @endcannot
     </div>
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -52,23 +51,22 @@
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-nav">
-                <div class="nav-item text-nowrap">
-                    {{-- <a class="" href="#">Sign out</a> --}}
-                    <a class="nav-link px-3" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                     document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                </div>
-            </div>
         @endcan
         {{-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> --}}
+        <div class="navbar-nav">
+            <div class="nav-item text-nowrap">
+                {{-- <a class="" href="#">Sign out</a> --}}
+                <a class="nav-link px-3" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                     document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
 
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </div>
+        </div>
     </header>
 
     <div class="container-fluid">
@@ -132,9 +130,10 @@
 
                     </div>
                 </nav>
-            @else
-            @endcan
+                @else
 
+            @endcan
+            
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">

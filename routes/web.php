@@ -9,6 +9,7 @@ use App\Http\Controllers\RegisterFromLINEController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UseProductController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,3 +82,8 @@ Route::prefix('manager')
 // 使用する商品登録
 Route::post('/products/bookmark/{post}', [UseProductController::class,'store'])->name('bookmark.store');
 Route::get('/products/unbookmark/{post}', [UseProductController::class, 'destroy'])->name('bookmark.destroy');
+
+
+
+// ニュース一覧
+Route::get('/news', [App\Http\Controllers\PostController::class, 'index'])->name('news');
