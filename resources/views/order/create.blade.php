@@ -24,7 +24,7 @@
                     <table class="table table-sm text-center table-bordered">
                         <thead>
                             <tr>
-                                <th scope="col">商品画像</th>
+                                <th scope="col" class="imageTh">商品画像</th>
                                 <th scope="col">商品名</th>
                                 <th scope="col">金額</th>
                                 {{-- <th scope="col">個数</th> --}}
@@ -33,7 +33,7 @@
                         <tbody>
                             @foreach ($products as $product)
                                 <tr>
-                                    <td rowspan="2" style="width:100px;">
+                                    <td rowspan="2" class="imageTh">
                                         @if ($product->product_img !== '')
                                             <img src="{{ \Storage::url($product->product_img) }}" class="products__img">
                                         @else

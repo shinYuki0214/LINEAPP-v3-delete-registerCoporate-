@@ -27,6 +27,7 @@
 .products__img {
     display: block;
     width: 100%;
+    max-width: 100%;
 }
 
 .top__wrapper {
@@ -96,4 +97,7 @@ body{
 
 .table{
     width: 100%;
+}
+.imageTh{
+    width: 30%;
 }

@@ -7,7 +7,7 @@
             <table class="table table-striped table-sm text-center table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col" style="width:100px;">商品画像</th>
+                        <th scope="col" class="imageTh">商品画像</th>
                         <th scope="col">商品名</th>
                         <th scope="col">商品料金</th>
                     </tr>
