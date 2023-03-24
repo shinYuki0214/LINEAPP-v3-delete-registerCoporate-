@@ -53,20 +53,6 @@
             </button>
         @endcan
         {{-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> --}}
-        <div class="navbar-nav">
-            <div class="nav-item text-nowrap">
-                {{-- <a class="" href="#">Sign out</a> --}}
-                <a class="nav-link px-3" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                     document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
-                </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
-            </div>
-        </div>
     </header>
 
     <div class="container-fluid">
